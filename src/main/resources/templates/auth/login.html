@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"
-	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
@@ -30,6 +29,9 @@
 				    	...<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 				 </form>
 	 </li>
+	  <li sec:authorize="hasRole('ROLE_ADMIN')">
+  				<a href="/admin/posts/">Add Post</a>
+		</li>
       </ul>
     </nav>
   </div>
@@ -43,9 +45,9 @@
             <div th:if="${param.logout}" class="alert"> 
                 You have been logged out.
             </div>		    
-		    <label for="username" class="sr-only">Username</label>
+		    <label for="username" class="sr-only"></label>
 		    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="true" />
-		    <label for="password" class="sr-only">Password</label>
+		    <label for="password" class="sr-only"></label>
 		    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" />
 		    <div class="checkbox">
 		        <label class="remember">

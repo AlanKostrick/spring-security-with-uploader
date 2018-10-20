@@ -29,10 +29,6 @@ public class Post {
 	public Post() {
 
 	}
-
-	public Post(String content) {
-		this.content = content;
-	}
 	
 	public Post(String content, String imageUrl) {
 		this.content = content;
