@@ -25,7 +25,7 @@
          <li class="active"><a href="/">Home</a></li>
 		 <li class=""><a href="/posts/">Posts</a></li>
       <li class="navbar-text navbar-right">
-			    Welcome <span sec:authentication="name">Guest</span>
+			    Welcome <span sec:authentication="name">Guest Name</span>
 				 <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
 				    	...<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 				 </form>
@@ -35,7 +35,7 @@
   </div>
   
   <div class="grid-item form">
-    	<form name="f" th:action="@{/login}" method="post" class="form-signin">
+    	<form name="frmlogin" th:action="@{/login}" method="post" class="form-signin">
 		    <h2 class="signIn">Please sign in</h2>
             <div th:if="${param.error}" class="alert">    
                 Invalid username and password.
