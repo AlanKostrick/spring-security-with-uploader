@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Security Demo</title>
+	
+	<link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}"/>
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet"/>
+</head>
+
+
+<body>
+                                                                                 
+<div class="grid-container">
+  
+  <div class="grid-item header">
+    <h2 id="logo"> Spring Security Demo </h2>
+    <nav> 
+      <ul>
+         <li class="active"><a href="/">Home</a></li>
+		 <li class=""><a href="/posts/">Posts</a></li>
+      <li class="navbar-text navbar-right">
+			    Welcome <span sec:authentication="name">Guest</span>
+				 <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+				    	...<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
+				 </form>
+	  </li>
+	   <li sec:authorize="hasRole('ROLE_ADMIN')">
+  				<a href="/admin/posts/">Add Post</a>
+	   </li>
+      </ul>
+    </nav>
+  </div>
+
+	<div class="grid-item form post">
+	<section class="add-post">
+	<form class="pane" th:action="@{/admin/addPost}" method="POST" enctype="multipart/form-data">
+		<div>
+		<input type="text" name="postContent" placeholder="Content" />
+		</div>
+		
+		<div>
+		<label>Image File
+			<input type="file" name="imageFile" />
+		</label>
+		</div>
+		
+		<div>
+		<button class="submit">Submit Post</button>
+		</div>
+		
+	</form> 
+	</section>
+	
+	
+	<section class="posts-list">
+		<ul>
+			<li th:if="${postsModel.size() ==0}">Currently no posts...please add one!</li>
+			<li th:if="${postsModel.size() !=0}" th:each="post: ${postsModel}">
+			  <a th:href="@{/posts/}" th:text="${post.content}"></a></li>
+		</ul>
+	</section>
+	</div>	
+	
+	
+	 <div class="grid-item footer">
+  		<small>&copy;wcci 2018</small>
+  	</div> 
+	
+	</div> <!-- container --> 
+
+	<script src = "/js/server-requests.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>posts</title>
+<link rel="stylesheet" href="../static/css/post.css" th:href="@{/css/post.css}"/>
+<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+  <div class="grid-item header">
+    <h2 id="logo"> Spring Security Demo </h2>
+    <nav> 
+      <ul>
+         <li class="active"><a href="/">Home</a></li>
+		 <li class=""><a href="/posts/">Posts</a></li>
+      <li class="navbar-text navbar-right">
+			    Welcome <span sec:authentication="name">Guest</span>
+				 <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+				    	...<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
+				 </form>
+	 </li>
+      </ul>
+    </nav>
+  </div>
+		
+<div th:each="post : ${postsModel}">
+	<div class="grid-item card">	
+		<img th:src="@{${post.imageUrl}}"></img>
+   		<p th:text="${post.content}"></p> 
+ 	</div>
+</div>
+ <div class="grid-item footer">
+  	<small>&copy;wcci 2018</small>
+  </div> 
+  
+</div> <!-- container -->
+
+</body>
+</html>
