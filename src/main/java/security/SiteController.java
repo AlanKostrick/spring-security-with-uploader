@@ -40,7 +40,7 @@ public class SiteController {
 	}
 
 	@RequestMapping("/admin/posts") // only accessible from admin side (try hitting on this endpoint as a
-									// guest...access will be forbidden)
+									// guest and access will be forbidden)
 	public String addPost(Model model) {
 		model.addAttribute("postsModel", postRepo.findAll());
 		return "layouts/post";
@@ -57,8 +57,7 @@ public class SiteController {
 		return "redirect:/posts";
 	}
 
-	@GetMapping("/uploads/{file:.+}") // Special pattern to allow "." to be part of PathVariable instead of truncating
-										// it
+	@GetMapping("/uploads/{file:.+}") // allows "." to be part of PathVariable instead of truncating it
 	public void serveImage(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("file") String fileName) throws Exception {
 
